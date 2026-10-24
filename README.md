@@ -14,3 +14,5 @@ nvim
 lazy.nvim bootstraps itself on first start and installs the plugins pinned in `lazy-lock.json`. Run `:LazyHealth` afterwards.
 
 Vim keeps its own config in `~/dotfiles`, so both editors work side by side.
+
+New to Neovim or LazyVim coming from Vim? See [docs/neovim-intro.md](docs/neovim-intro.md).
