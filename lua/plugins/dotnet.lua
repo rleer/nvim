@@ -1,6 +1,3 @@
--- Hand-installed arm64 build, see README. Mason only ships an x86_64 netcoredbg on macOS.
-local netcoredbg = vim.fn.expand("~/.local/share/netcoredbg/netcoredbg")
-
 return {
   -- roslyn.nvim replaces OmniSharp (which can't open .slnx); F# is not used
   { "seblyng/roslyn.nvim", ft = { "cs" }, opts = {} },
@@ -34,6 +31,7 @@ return {
     opts = function(_, opts)
       -- Crashdummyy's registry tracks the Roslyn version used by vscode-csharp
       opts.registries = { "github:mason-org/mason-registry", "github:Crashdummyy/mason-registry" }
+      -- no C# debugging (Mason's netcoredbg is x86_64 only on macOS anyway)
       opts.ensure_installed = vim.tbl_filter(function(pkg)
         return pkg ~= "netcoredbg" and pkg ~= "fantomas"
       end, opts.ensure_installed or {})
@@ -43,23 +41,13 @@ return {
   {
     "mfussenegger/nvim-dap",
     optional = true,
+    -- drop the extra's netcoredbg adapter and launch configs, which would point at a missing binary
     opts = function()
       local dap = require("dap")
-      local adapter = {
-        type = "executable",
-        command = netcoredbg,
-        args = { "--interpreter=vscode" },
-        options = { detached = false },
-      }
-      -- "netcoredbg" is used by the lang.dotnet configs and neotest-vstest, "coreclr" by launch.json
-      dap.adapters.netcoredbg = adapter
-      dap.adapters.coreclr = adapter
+      dap.adapters.netcoredbg = nil
+      for _, lang in ipairs({ "cs", "fsharp", "vb" }) do
+        dap.configurations[lang] = nil
+      end
     end,
-  },
-  {
-    "jay-babu/mason-nvim-dap.nvim",
-    optional = true,
-    -- otherwise the coreclr adapter makes it install Mason's netcoredbg
-    opts = { automatic_installation = { exclude = { "coreclr", "netcoredbg" } } },
   },
 }
