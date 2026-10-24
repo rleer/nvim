@@ -9,7 +9,7 @@ New to Neovim or LazyVim coming from Vim? See [docs/neovim-intro.md](docs/neovim
 On a fresh Mac:
 
 1. Install the Xcode Command Line Tools (git and the C compiler that builds Treesitter parsers): `xcode-select --install`. The Homebrew installer offers to do this too.
-2. Install [Homebrew](https://brew.sh).
+2. Install [Homebrew](https://brew.sh) and follow its "Next steps" output, which adds `eval "$(/opt/homebrew/bin/brew shellenv)"` to `~/.zprofile`. Without it, `brew` isn't on PATH in new shells.
 3. Install the tools:
 
    ```sh
@@ -37,7 +37,7 @@ What each one is for:
 | `ripgrep`, `fd` | grep and file pickers |
 | `fzf` | checked by `:checkhealth lazyvim` |
 | `lazygit` | `<leader>gg` |
-| `gh` | GitHub issue and PR pickers (`<leader>gi`, `<leader>gp`); optional |
+| `gh` | GitHub issue and PR pickers (`<leader>gi`, `<leader>gp`), after `gh auth login`; optional |
 | `uv` + Python 3.14 | Mason installs basedpyright and debugpy with pip and needs Python 3.10 or newer; macOS's `/usr/bin/python3` is 3.9. uv also manages project venvs |
 | `dotnet-sdk` | runs the Roslyn language server (.NET 10), installs CSharpier, runs C# tests |
 | Nerd Font | icons in the explorer, statusline and pickers |
