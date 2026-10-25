@@ -63,3 +63,7 @@ Expected `:checkhealth` warnings that need no action: lazy.nvim's luarocks (no p
 Start `nvim` from a shell, not a GUI launcher, so `~/.local/bin` is on PATH when Mason installs or updates its pip-based tools.
 
 Vim keeps its own config in `~/dotfiles`, so both editors work side by side.
+
+## License
+
+[MIT](LICENSE), except the files taken from the [LazyVim starter](https://github.com/LazyVim/starter), which stay under its [Apache License 2.0](LICENSE-APACHE): `init.lua`, `lua/config/*.lua`, `lua/plugins/example.lua`, `stylua.toml`, `.neoconf.json` and `.gitignore`. Of these, `lua/config/options.lua` is modified (it selects basedpyright as the Python LSP).
